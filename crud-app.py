@@ -18,7 +18,7 @@ gc = init_connection()
 # ==========================================
 # 2. 開啟指定的試算表與工作表
 # ==========================================
-SHEET_INPUT = "https://docs.google.com/spreadsheets/d/1C6foZNpOeU5d5rSDlSNoNLAXHTjU8dYe2PI7V7H1YAk/edit?gid=0#gid=0"
+SHEET_INPUT = “https://docs.google.com/spreadsheets/d/1C6foZNpOeU5d5rSDlSNoNLAXHTjU8dYe2PI7V7H1YAk/edit?gid=0#gid=0"
 WORKSHEET_NAME = "工作表1"
 
 try:
@@ -29,8 +29,7 @@ try:
     worksheet = sh.worksheet(WORKSHEET_NAME)
 except Exception as e:
     st.error(
-        f"無法開啟試算表，請確認名稱/網址是否正確，且服務帳號 ({gc.auth.signer_email}) 
-        已被加入共用編輯者！\n錯誤訊息：{e}")
+        f"無法開啟試算表，請確認名稱/網址是否正確，且服務帳號 ({gc.auth.signer_email}) 已被加入共用編輯者！\n錯誤訊息：{e}")
     st.stop()
 
 st.title("📊 Google Sheets 讀寫測試儀表板")
@@ -71,7 +70,7 @@ with st.form("add_data_form", clear_on_submit=True):
             with st.spinner("正在寫入資料中..."):
                 worksheet.append_row([col1, col2])
             st.success("資料已成功寫入！")
-st.rerun()
+            st.rerun()
 
 st.divider()
 
@@ -111,7 +110,8 @@ if data:
                         worksheet.update_cell(selected_row_update, 2, new_qty)
                     st.success("資料已成功更新！")
                     st.rerun()
-                   # ==========================================
+
+    # ==========================================
     # 6. 刪除資料 (Delete)
     # ==========================================
     with col_delete:
@@ -129,4 +129,3 @@ if data:
                 worksheet.delete_rows(selected_row_del)
             st.success("資料已成功刪除！")
             st.rerun()
-
